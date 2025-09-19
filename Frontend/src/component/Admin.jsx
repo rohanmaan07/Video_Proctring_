@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Loader2, Calendar, User, LogOut, Trash2 } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import api from "../util/axios"; 
+import api from "../util/axios";
 
 const Admin = ({ setIsAdmin }) => {
   const [interviews, setInterviews] = useState([]);
@@ -13,7 +13,7 @@ const Admin = ({ setIsAdmin }) => {
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
-        const res = await api.get("/api/interviews"); 
+        const res = await api.get("/api/interviews");
         setInterviews(res.data);
       } catch (err) {
         console.error(err);
@@ -28,14 +28,15 @@ const Admin = ({ setIsAdmin }) => {
   const handleLogout = () => {
     localStorage.removeItem("isAdmin");
     setIsAdmin(false);
-    navigate("/"); 
+    navigate("/");
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this interview?")) return;
+    if (!window.confirm("Are you sure you want to delete this interview?"))
+      return;
     try {
       await api.delete(`/api/interview/${id}`);
-      setInterviews(prev => prev.filter(i => i._id !== id));
+      setInterviews((prev) => prev.filter((i) => i._id !== id));
       toast.success("Interview deleted successfully!");
     } catch (err) {
       console.error(err);
@@ -55,7 +56,12 @@ const Admin = ({ setIsAdmin }) => {
 
   return (
     <div className="min-h-screen bg-[#0b1220] text-white p-8">
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+      />
+
       <header className="max-w-5xl mx-auto text-center mb-10 relative">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
           Admin Dashboard
@@ -63,15 +69,27 @@ const Admin = ({ setIsAdmin }) => {
         <p className="text-gray-400 mt-2">
           Manage and review all scheduled interviews easily
         </p>
+      </header>
+
+      <div className="max-w-5xl mx-auto bg-[#071127] border border-gray-700 shadow-2xl rounded-2xl p-6 backdrop-blur-md relative">
         <button
           onClick={handleLogout}
-          className="absolute top-0 right-0 mt-4 mr-4 flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-semibold text-white shadow-lg transition-all"
+          className="hidden sm:flex absolute top-4 right-4 items-center gap-2 px-4 py-2 bg-[#071127] text-red-600 border-2 border-red-600 rounded-lg font-semibold shadow-lg hover:bg-red-600 hover:text-white transition-colors"
         >
           <LogOut className="w-5 h-5" />
           Logout
         </button>
-      </header>
-      <div className="max-w-5xl mx-auto bg-[#071127] border border-gray-700 shadow-2xl rounded-2xl p-6 backdrop-blur-md">
+
+        <div className="flex justify-end sm:hidden mb-4">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-4 py-2 bg-[#071127] text-white border-2 border-red-600 rounded-lg font-semibold shadow-lg hover:bg-red-600 hover:text-white transition-colors"
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </button>
+        </div>
+
         <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2 text-blue-400">
           <Calendar className="w-6 h-6" /> All Interviews
         </h2>
@@ -97,7 +115,8 @@ const Admin = ({ setIsAdmin }) => {
                       {interview.candidateName}
                     </p>
                     <p className="text-sm text-gray-400">
-                      Started on: {new Date(interview.startTime).toLocaleString()}
+                      Started on:{" "}
+                      {new Date(interview.startTime).toLocaleString()}
                     </p>
                   </div>
                   <span className="inline-block bg-blue-500/20 text-blue-400 text-sm px-4 py-1 rounded-full font-medium group-hover:bg-blue-500/40 transition">
