@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader2, Calendar, User, LogOut, Trash2 } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../util/axios"; 
 
 const Admin = ({ setIsAdmin }) => {
   const [interviews, setInterviews] = useState([]);
@@ -13,7 +13,7 @@ const Admin = ({ setIsAdmin }) => {
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
-        const res = await axios.get("/api/interviews");
+        const res = await api.get("/api/interviews"); 
         setInterviews(res.data);
       } catch (err) {
         console.error(err);
@@ -34,7 +34,7 @@ const Admin = ({ setIsAdmin }) => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this interview?")) return;
     try {
-      await axios.delete(`/api/interview/${id}`);
+      await api.delete(`/api/interview/${id}`);
       setInterviews(prev => prev.filter(i => i._id !== id));
       toast.success("Interview deleted successfully!");
     } catch (err) {

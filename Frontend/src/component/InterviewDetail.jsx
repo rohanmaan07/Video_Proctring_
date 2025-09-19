@@ -1,8 +1,9 @@
+// src/components/InterviewDetail.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import ReportDocument from './ReportDocument';
+import api from '../util/axios'; 
 
 const InterviewDetail = () => {
   const [interview, setInterview] = useState(null);
@@ -15,7 +16,7 @@ const InterviewDetail = () => {
       try {
         setLoading(true);
         setError('');
-        const res = await axios.get(`/api/interview/${id}`);
+        const res = await api.get(`/api/interview/${id}`);
         setInterview(res.data);
       } catch (err) {
         setError('Could not fetch the report.');
@@ -50,6 +51,8 @@ const InterviewDetail = () => {
           </span>
         </div>
       </div>
+
+
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-[#071127] p-6 rounded-xl shadow-xl text-center border border-gray-700">
           <h3 className="text-xl font-semibold mb-4 text-gray-300">Final Integrity Score</h3>
@@ -85,6 +88,8 @@ const InterviewDetail = () => {
           )}
         </ul>
       </div>
+
+      {/* Video & Logs */}
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 bg-[#071127] p-4 rounded-xl border border-gray-700 shadow-lg">
           <h3 className="text-xl font-semibold mb-4">Recorded Video</h3>
@@ -113,6 +118,7 @@ const InterviewDetail = () => {
           </div>
         </div>
       </div>
+
       <div className="max-w-4xl mx-auto text-center mt-8">
         <PDFDownloadLink
           document={<ReportDocument interview={interview} />}
