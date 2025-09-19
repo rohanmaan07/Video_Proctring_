@@ -149,7 +149,7 @@ npm run dev
 ## 🔐 Admin Access
 Default admin password is set inside `AdminLogin.jsx`:
 ```js
-const adminPassword = "admin123";
+const adminPassword = "9711657307--message me for the password";
 ```
 ---
 
