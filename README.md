@@ -172,9 +172,9 @@ const adminPassword = "admin123";
 
 ### 🖼️ Project Screenshots
 
-- **Admin Dashboard:** ![Admin Dashboard](public/Admin.jpg)
-- **Homepage:** ![Homepage](public/Homepage.jpg)
-- **Interview Details:** ![Interview Details](public/InterDetails.jpg)
-- **Interview View:** ![Interview View](public/Interview.jpg)
-- **Proctoring Report:** ![Proctoring Report](public/ProctoringRe.jpg)
-- **PDF Report:** ![PDF Report](public/Prpdf.jpg)
+- **Admin Dashboard:** ![Admin Dashboard](Frontend/public/Admin.jpg)
+- **Homepage:** ![Homepage](Frontend/public/Homepage.jpg)
+- **Interview Details:** ![Interview Details](Frontend/public/InterDetails.jpg)
+- **Interview View:** ![Interview View](Frontend/public/interview.jpg)
+- **Proctoring Report:** ![Proctoring Report](Frontend/public/proctoringReport.jpg)
+- **PDF Report:** ![PDF Report](Frontend/public/Prpdf.jpg)
